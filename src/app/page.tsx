@@ -6,6 +6,7 @@ import Link from "next/link";
 import { BsArrowRightSquare } from "react-icons/bs";
 
 import Input from "@/components/Input";
+import Card from "@/components/Card";
 
 async function getDailyGame() {
   try {
@@ -18,8 +19,22 @@ async function getDailyGame() {
     throw new Error("Failed to fech data!");
   }
 }
+
+async function getGameList() {
+  try {
+    const res = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=games`, {
+      next: { revalidate: 320 },
+    });
+    return res.json();
+  } catch (error) {
+    throw new Error("Failed to fech data!");
+  }
+}
+
 export default async function Home() {
   const dailyGame: IGameProps = await getDailyGame();
+
+  const gameList: IGameProps[] = await getGameList();
 
   return (
     <main className='w-full'>
@@ -49,7 +64,15 @@ export default async function Home() {
           </section>
         </Link>
 
-        <Input type="text" placeholder="Looking for any game?"/>
+        <Input type='text' placeholder='Looking for any game?' />
+
+        <h2 className='text-lg font-bold my-5'>Games to know</h2>
+
+        <section className='grid gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+          {gameList.map((item) => (
+            <Card key={item.id} data={item} />
+          ))}
+        </section>
       </Container>
     </main>
   );
