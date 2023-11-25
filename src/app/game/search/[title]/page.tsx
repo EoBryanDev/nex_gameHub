@@ -3,7 +3,7 @@ import Container from "@/components/Container";
 import Input from "@/components/Input";
 import { IGameProps } from "@/utils/interface/IGameProps";
 
-interface ISearch {
+interface ISearchProps {
   params: {
     title: string;
   };
@@ -11,8 +11,9 @@ interface ISearch {
 
 const getSpecifiedGame = async (title: string) => {
   try {
+    const decodedTitle = decodeURIComponent(title);
     const res = await fetch(
-      `${process.env.NEXT_API_URL}/next-api/?api=game&title=${title}`,
+      `${process.env.NEXT_API_URL}/next-api/?api=game&title=${decodedTitle}`,
       { next: { revalidate: 320 } }
     );
     return res.json();
@@ -20,7 +21,7 @@ const getSpecifiedGame = async (title: string) => {
     throw new Error("Failed to fech data!");
   }
 };
-const Search: React.FC<ISearch> = async ({ params }: ISearch) => {
+const Search: React.FC<ISearchProps> = async ({ params }: ISearchProps) => {
   const game: IGameProps[] = await getSpecifiedGame(params.title);
   return (
     <main className='w-full text-black'>

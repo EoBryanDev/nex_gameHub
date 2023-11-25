@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
-interface IInput {
+interface IInputProps {
   type: string;
   placeholder: string;
 }
 
-const Input: React.FC<IInput> = ({ type, placeholder }: IInput) => {
+const Input: React.FC<IInputProps> = ({ type, placeholder }: IInputProps) => {
   const [inputValue, setInputValue] = useState("");
   const router = useRouter();
 

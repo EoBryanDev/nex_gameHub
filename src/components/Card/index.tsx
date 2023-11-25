@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiRightArrowCircle } from "react-icons/bi";
 
-interface ICard {
+interface ICardProps {
   data: IGameProps;
 }
 
-const Card: React.FC<ICard> = ({ data }: ICard) => {
+const Card: React.FC<ICardProps> = ({ data }: ICardProps) => {
   return (
     <Link href={`/game/${data.id}`}>
       <article className='w-full bg-slate-200 rounded-lg p-4 mb-5'>
