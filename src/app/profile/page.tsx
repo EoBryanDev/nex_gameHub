@@ -1,7 +1,14 @@
 import Container from "@/components/Container";
+import Favorite from "@/components/Favorite";
+import { Metadata } from "next";
 import Image from "next/image";
 import userImg from "public/user.png";
 import { FaShareAlt } from "react-icons/fa";
+
+export const metadata: Metadata = {
+  title: "DailyGames - My Profile",
+  description: "My personal page",
+};
 
 const Profile: React.FC = () => {
   return (
@@ -25,6 +32,18 @@ const Profile: React.FC = () => {
             <button className='bg-gray-700 px-4 py-3 rounded-lg'>
               <FaShareAlt size={24} color='#ffffff' />
             </button>
+          </div>
+        </section>
+
+        <section className='flex flex-wrap gap-5 flex-col md:flex-row'>
+          <div className='flex-grow flex-wrap'>
+            <Favorite />
+          </div>
+          <div className='flex-grow flex-wrap'>
+            <Favorite />
+          </div>
+          <div className='flex-grow flex-wrap'>
+            <Favorite />
           </div>
         </section>
       </Container>
