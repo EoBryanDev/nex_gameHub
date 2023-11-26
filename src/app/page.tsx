@@ -16,7 +16,7 @@ async function getDailyGame() {
     );
     return res.json();
   } catch (error) {
-    throw new Error("Failed to fech data!");
+    throw new Error("Failed to fetch data!");
   }
 }
 
